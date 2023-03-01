@@ -1,3 +1,5 @@
+import { WebSocket as MockWebSocket } from 'mock-socket';
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -25,15 +27,14 @@
 Cypress.Commands.add("visitWithWsStub", (path) => {
   cy.visit(path, {
     onBeforeLoad(win) {
-      cy.stub(win, "WebSocket", (url) => new WebSocket(url));
+      cy.stub(win, "WebSocket").callsFake((url) => new WebSocket(url));
     },
   });
 });
 
 Cypress.Commands.add("incommingMessage", (wsServer, message) => {
-  cy.wrap(wsServer).then((connection) => {
-    message =
-      message.constructor.name === "Object" ? JSON.stringify(message) : message;
-    connection.send(message);
-  });
+  cy.wrap(wsServer).invoke(
+    "send",
+    message.constructor.name === "Object" ? JSON.stringify(message) : message
+  );
 });

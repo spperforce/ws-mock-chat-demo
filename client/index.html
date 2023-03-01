@@ -37,6 +37,7 @@
       });
 
       connection.addEventListener("message", (incommingMessage) => {
+        console.log('incoming message', incommingMessage);
         let newMessage = document.createElement("div");
         if (isJson(incommingMessage.data)) {
           message = JSON.parse(incommingMessage.data);

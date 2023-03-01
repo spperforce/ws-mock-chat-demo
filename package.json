@@ -8,11 +8,11 @@
   },
   "scripts": {
     "start:server": "nodemon --ignore client/",
-    "start:client": "superstatic client --port 3000",
+    "start:client": "superstatic client --port 3001",
     "cypress": "cypress open"
   },
   "devDependencies": {
-    "cypress": "^8.1.0",
+    "cypress": "12.7.0",
     "mock-socket": "^9.0.3",
     "nodemon": "^2.0.12",
     "superstatic": "^7.1.0"
